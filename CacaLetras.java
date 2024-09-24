@@ -8,36 +8,26 @@ public class CacaLetras {
     public List<String> buscaPalavras(char[][] letras, int linha, 
                                       int coluna,boolean[][] visitados,
                                       List<String> palavras){
-        if (palavras == null) {
-            palavras = new ArrayList<>();
-            palavras.add(letras[linha][coluna]+"");
-        } else {
-            List<String> novasPalavras = new ArrayList<>();
-                
-            for (String palavra : palavras) {
-                novasPalavras.add(palavra+letras[linha][coluna]);
-            }
-            palavras.addAll(novasPalavras);
-        }
+        List<String> palvras = new ArrayList<>();
         if (visitados == null) {
             visitados = new boolean[letras.length][letras[0].length];
         }
         visitados[linha][coluna] = true;
         try {
             if (!visitados[linha-1][coluna-1]) {
-                palavras.addAll(buscaPalavras(letras, linha-1, coluna-1, visitados, palavras));
+                palvras.addAll(buscaPalavras(letras, linha-1, coluna-1, visitados, palavras));
             }
         }catch (IndexOutOfBoundsException e) {
         }
         try {
             if (!visitados[linha-1][coluna]) {
-                palavras.addAll(buscaPalavras(letras, linha-1, coluna, visitados, palavras));
+                palvras.addAll(buscaPalavras(letras, linha-1, coluna, visitados, palavras));
             }
         }catch (IndexOutOfBoundsException e) {
         }
         try {
             if (!visitados[linha-1][coluna+1]) {
-                palavras.addAll(buscaPalavras(letras, linha-1, coluna+1, visitados, palavras));
+                palvras.addAll(buscaPalavras(letras, linha-1, coluna+1, visitados, palavras));
             }
         }catch (IndexOutOfBoundsException e) {
         }
@@ -45,13 +35,13 @@ public class CacaLetras {
 
         try {
             if (!visitados[linha][coluna-1]) {
-                palavras.addAll(buscaPalavras(letras, linha, coluna-1, visitados, palavras));
+                palvras.addAll(buscaPalavras(letras, linha, coluna-1, visitados, palavras));
             }
         }catch (IndexOutOfBoundsException e) {
         }
         try {
             if (!visitados[linha][coluna+1]) {
-                palavras.addAll(buscaPalavras(letras, linha, coluna+1, visitados, palavras));
+                palvras.addAll(buscaPalavras(letras, linha, coluna+1, visitados, palavras));
             }
         }catch (IndexOutOfBoundsException e) {
         }
@@ -60,30 +50,36 @@ public class CacaLetras {
 
         try {
             if (!visitados[linha+1][coluna-1]) {
-                palavras.addAll(buscaPalavras(letras, linha+1, coluna-1, visitados, palavras));
+                palvras.addAll(buscaPalavras(letras, linha+1, coluna-1, visitados, palavras));
             }
         }catch (IndexOutOfBoundsException e) {
         }
         try {
             if (!visitados[linha+1][coluna]) {
-                palavras.addAll(buscaPalavras(letras, linha+1, coluna, visitados, palavras));
+                palvras.addAll(buscaPalavras(letras, linha+1, coluna, visitados, palavras));
             }
         }catch (IndexOutOfBoundsException e) {
         }
         try {
             if (!visitados[linha+1][coluna+1]) {
-                palavras.addAll(buscaPalavras(letras, linha+1, coluna+1, visitados, palavras));
+                palvras.addAll(buscaPalavras(letras, linha+1, coluna+1, visitados, palavras));
             }
         }catch (IndexOutOfBoundsException e) {
         }
 
 
-        for (String palavra : palavras) {
-            System.out.println(palavra);
+        List<String> temp = new ArrayList<>();
+        for (String palavra : palvras) {
+            temp.add(String.valueOf(letras[linha][coluna]) + palavra);
         }
-
-
-        return palavras; 
+        palvras.addAll(temp);
+        if (palvras.isEmpty()) {
+            palvras.add(String.valueOf(letras[linha][coluna]));
+        }
+        if (letras[linha][coluna] == 'a') {
+           System.out.println("a");
+        }
+        return palvras; 
 
     }
 }

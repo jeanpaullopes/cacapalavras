@@ -19,9 +19,9 @@ public class Main {
  
         CacaLetras cacaLetras = new CacaLetras();
         List<String> palavras = cacaLetras.buscaPalavras(letras, 0, 0, null, null);
-        //for (String palavra : palavras) {
-        //    System.out.println(palavra);
-        //}
+        for (String palavra : palavras) {
+            System.out.println(palavra);
+        }
 
     }
 }
